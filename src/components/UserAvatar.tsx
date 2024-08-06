@@ -1,8 +1,7 @@
 import avatarPlaceholder from "@/assets/avatar-placeholder.png";
+import { DEFAULT_USER_AVATAR_SIZE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-
-const DEFAULT_USER_AVATAR_SIZE = 48;
 
 interface UserAvatarProps {
   avatarUrl: string | null | undefined;
