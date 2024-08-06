@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/toaster";
 import { ThemeOption } from "@/lib/constants";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
@@ -34,6 +35,7 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   );
