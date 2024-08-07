@@ -1,12 +1,14 @@
 import { validateRequest } from "@/auth";
-import { NUM_POSTS_PER_PAGE, postDataInclude } from "@/lib/constants";
+import { NUM_POSTS_PER_PAGE } from "@/lib/constants";
 import prisma from "@/lib/prisma";
 import type { PostsPage } from "@/lib/types";
+import { getPostDataInclude } from "@/lib/utils";
 import type { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
   try {
     const cursor = req.nextUrl.searchParams.get("cursor") || undefined;
+
     const pageSize = NUM_POSTS_PER_PAGE;
 
     const { user } = await validateRequest();
@@ -16,7 +18,7 @@ export async function GET(req: NextRequest) {
     }
 
     const posts = await prisma.post.findMany({
-      include: postDataInclude,
+      include: getPostDataInclude(user.id),
       orderBy: { createdAt: "desc" },
       take: pageSize + 1,
       cursor: cursor ? { id: cursor } : undefined,
@@ -28,6 +30,7 @@ export async function GET(req: NextRequest) {
       posts: posts.slice(0, pageSize),
       nextCursor,
     };
+
     return Response.json(data);
   } catch (error) {
     console.error(error);

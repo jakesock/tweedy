@@ -1,3 +1,4 @@
+import type { Prisma } from "@prisma/client";
 import { type ClassValue, clsx } from "clsx";
 import { formatDate, formatDistanceToNowStrict } from "date-fns";
 import { twMerge } from "tailwind-merge";
@@ -26,4 +27,34 @@ export function formatNumber(num: number): string {
     notation: "compact",
     maximumFractionDigits: 1,
   }).format(num);
+}
+
+export function getUserDataSelect(loggedInUserId: string) {
+  return {
+    id: true,
+    username: true,
+    displayName: true,
+    avatarUrl: true,
+    followers: {
+      where: {
+        followerId: loggedInUserId,
+      },
+      select: {
+        followerId: true,
+      },
+    },
+    _count: {
+      select: {
+        followers: true,
+      },
+    },
+  } satisfies Prisma.UserSelect;
+}
+
+export function getPostDataInclude(loggedInUserId: string) {
+  return {
+    user: {
+      select: getUserDataSelect(loggedInUserId),
+    },
+  } satisfies Prisma.PostInclude;
 }
