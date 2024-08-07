@@ -1,9 +1,9 @@
 import { validateRequest } from "@/auth";
 import { NUM_POSTS_PER_PAGE } from "@/lib/constants";
 import prisma from "@/lib/prisma";
-import { PostsPage } from "@/lib/types";
+import type { PostsPage } from "@/lib/types";
 import { getPostDataInclude } from "@/lib/utils";
-import { NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 
 export async function GET(
   req: NextRequest,

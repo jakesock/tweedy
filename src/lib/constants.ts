@@ -15,6 +15,7 @@ export enum QueryKeyOption {
   FOLLOWING_FEED = "following-feed",
   FOLLOWER_INFO = "follower-info",
   USER_POSTS = "user-posts",
+  USER_DATA = "user-data",
 }
 export const FOR_YOU_QUERY_KEY = [QueryKeyOption.POST_FEED, QueryKeyOption.FOR_YOU];
 export const FOLLOWING_FEED_QUERY_KEY = [QueryKeyOption.POST_FEED, QueryKeyOption.FOLLOWING_FEED];
