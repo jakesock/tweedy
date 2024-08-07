@@ -1,22 +1,23 @@
 "use client";
 
+import InfiniteScrollContainer from "@/components/InfiniteScrollContainer";
 import Post from "@/components/posts/Post";
-import { Button } from "@/components/ui/button";
 import kyInstance from "@/lib/ky";
 import type { PostsPage } from "@/lib/types";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 
 export default function ForYouFeed() {
-  const { data, fetchNextPage, status } = useInfiniteQuery({
-    queryKey: ["post-feed", "for-you"],
-    queryFn: ({ pageParam }) =>
-      kyInstance
-        .get("/api/posts/for-you", pageParam ? { searchParams: { cursor: pageParam } } : {})
-        .json<PostsPage>(),
-    initialPageParam: null as string | null,
-    getNextPageParam: (lastPage) => lastPage.nextCursor,
-  });
+  const { data, hasNextPage, isFetching, isFetchingNextPage, fetchNextPage, status } =
+    useInfiniteQuery({
+      queryKey: ["post-feed", "for-you"],
+      queryFn: ({ pageParam }) =>
+        kyInstance
+          .get("/api/posts/for-you", pageParam ? { searchParams: { cursor: pageParam } } : {})
+          .json<PostsPage>(),
+      initialPageParam: null as string | null,
+      getNextPageParam: (lastPage) => lastPage.nextCursor,
+    });
 
   const posts = data?.pages.flatMap((page) => page.posts) || [];
 
@@ -29,11 +30,14 @@ export default function ForYouFeed() {
   }
 
   return (
-    <div className="space-y-5">
+    <InfiniteScrollContainer
+      onBottomReached={() => hasNextPage && !isFetching && fetchNextPage()}
+      className="space-y-5"
+    >
       {posts.map((post) => (
         <Post key={post.id} post={post} />
       ))}
-      <Button onClick={() => fetchNextPage()}>load more</Button>
-    </div>
+      {isFetchingNextPage && <Loader2 className="mx-auto my-3 animate-spin" />}
+    </InfiniteScrollContainer>
   );
 }
