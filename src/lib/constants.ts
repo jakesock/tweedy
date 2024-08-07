@@ -23,3 +23,9 @@ export const postDataInclude = {
     select: userDataSelect,
   },
 } satisfies Prisma.PostInclude;
+
+export enum QueryKeyOption {
+  POST_FEED = "post-feed",
+  FOR_YOU = "for-you",
+}
+export const FOR_YOU_QUERY_KEY = [QueryKeyOption.POST_FEED, QueryKeyOption.FOR_YOU];

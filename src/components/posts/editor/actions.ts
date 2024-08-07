@@ -1,6 +1,7 @@
 "use server";
 
 import { validateRequest } from "@/auth";
+import { postDataInclude } from "@/lib/constants";
 import prisma from "@/lib/prisma";
 import { createPostSchema } from "@/lib/validation";
 
@@ -11,10 +12,13 @@ export async function submitPost(input: string) {
 
   const { content } = createPostSchema.parse({ content: input });
 
-  await prisma.post.create({
+  const newPost = await prisma.post.create({
     data: {
       content,
       userId: user.id,
     },
+    include: postDataInclude,
   });
+
+  return newPost;
 }
