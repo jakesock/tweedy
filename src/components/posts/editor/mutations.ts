@@ -1,5 +1,6 @@
+import { useSession } from "@/app/(main)/SessionProvider";
 import { useToast } from "@/components/ui/use-toast";
-import { FOR_YOU_QUERY_KEY } from "@/lib/constants";
+import { QueryKeyOption } from "@/lib/constants";
 import type { PostsPage } from "@/lib/types";
 import type { InfiniteData, QueryFilters } from "@tanstack/react-query";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -8,11 +9,20 @@ import { submitPost } from "./actions";
 export function useSubmitPostMutation() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const { user } = useSession();
 
   const mutation = useMutation({
     mutationFn: submitPost,
     onSuccess: async (newPost) => {
-      const queryFilter: QueryFilters = { queryKey: FOR_YOU_QUERY_KEY };
+      const queryFilter = {
+        queryKey: [QueryKeyOption.POST_FEED],
+        predicate(query) {
+          return (
+            query.queryKey.includes(QueryKeyOption.FOR_YOU) ||
+            (query.queryKey.includes(QueryKeyOption.USER_POSTS) && query.queryKey.includes(user.id))
+          );
+        },
+      } satisfies QueryFilters;
 
       // cancel running query so mutation doesn't occur during active page fetching
       await queryClient.cancelQueries(queryFilter);
@@ -45,7 +55,7 @@ export function useSubmitPostMutation() {
         queryKey: queryFilter.queryKey,
         predicate(query) {
           // invalidate queries where data is null
-          return !query.state.data;
+          return queryFilter.predicate(query) && !query.state.data;
         },
       });
 

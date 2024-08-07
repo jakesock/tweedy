@@ -2,7 +2,7 @@ import type { Prisma } from "@prisma/client";
 import { type ClassValue, clsx } from "clsx";
 import { formatDate, formatDistanceToNowStrict } from "date-fns";
 import { twMerge } from "tailwind-merge";
-import { ONE_DAY_MS } from "./constants";
+import { ONE_DAY_MS, QueryKeyOption } from "./constants";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -35,6 +35,8 @@ export function getUserDataSelect(loggedInUserId: string) {
     username: true,
     displayName: true,
     avatarUrl: true,
+    bio: true,
+    createdAt: true,
     followers: {
       where: {
         followerId: loggedInUserId,
@@ -46,6 +48,7 @@ export function getUserDataSelect(loggedInUserId: string) {
     _count: {
       select: {
         followers: true,
+        posts: true,
       },
     },
   } satisfies Prisma.UserSelect;
@@ -57,4 +60,8 @@ export function getPostDataInclude(loggedInUserId: string) {
       select: getUserDataSelect(loggedInUserId),
     },
   } satisfies Prisma.PostInclude;
+}
+
+export function getUserPostsQueryKey(userId: string) {
+  return [QueryKeyOption.POST_FEED, QueryKeyOption.USER_POSTS, userId];
 }
