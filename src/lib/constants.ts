@@ -12,6 +12,8 @@ export enum ThemeOption {
 export enum QueryKeyOption {
   POST_FEED = "post-feed",
   FOR_YOU = "for-you",
+  FOLLOWING_FEED = "following-feed",
   FOLLOWER_INFO = "follower-info",
 }
 export const FOR_YOU_QUERY_KEY = [QueryKeyOption.POST_FEED, QueryKeyOption.FOR_YOU];
+export const FOLLOWING_FEED_QUERY_KEY = [QueryKeyOption.POST_FEED, QueryKeyOption.FOLLOWING_FEED];
