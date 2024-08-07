@@ -3,6 +3,7 @@ import type { Prisma } from "@prisma/client";
 export const DEFAULT_USER_AVATAR_SIZE = 48;
 export const ONE_DAY_MS = 24 * 60 * 60 * 1000;
 export const TRENDING_TOPICS_REVALIDATE_TIME = 3 * 60 * 60;
+export const NUM_POSTS_PER_PAGE = 10;
 
 export enum ThemeOption {
   LIGHT = "light",
