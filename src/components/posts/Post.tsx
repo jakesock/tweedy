@@ -39,6 +39,8 @@ export default function Post({ post }: PostProps) {
             <Link
               href={`/posts/${post.id}`}
               className="block text-sm text-muted-foreground hover:underline"
+              // suppress warning. when post date is updating in seconds, front end and server may be mismatched. does not break app, so it's ok
+              suppressHydrationWarning
             >
               {formatRelativeDate(post.createdAt)}
             </Link>
