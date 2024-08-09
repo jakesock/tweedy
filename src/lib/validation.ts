@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { MAX_NUM_FILES_PER_UPLOAD } from "./constants";
 
 const requiredString = z.string().trim().min(1, "Required");
 
@@ -19,7 +20,12 @@ export type LoginValues = z.infer<typeof loginSchema>;
 
 export const createPostSchema = z.object({
   content: requiredString,
+  mediaIds: z
+    .array(z.string())
+    .max(MAX_NUM_FILES_PER_UPLOAD, `Cannot have more than ${MAX_NUM_FILES_PER_UPLOAD} attachments`),
 });
+
+export type CreatePostValues = z.infer<typeof createPostSchema>;
 
 export const updateUserProfileSchema = z.object({
   displayName: requiredString,

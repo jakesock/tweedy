@@ -1,4 +1,9 @@
 import { validateRequest } from "@/auth";
+import {
+  MAX_IMAGE_ATTACHMENT_FILE_SIZE,
+  MAX_NUM_FILES_PER_UPLOAD,
+  MAX_VIDEO_ATTACHMENT_FILE_SIZE,
+} from "@/lib/constants";
 import prisma from "@/lib/prisma";
 import type { FileRouter } from "uploadthing/next";
 import { createUploadthing } from "uploadthing/next";
@@ -45,6 +50,26 @@ export const fileRouter = {
       });
 
       return { avatarUrl: newAvatarUrl };
+    }),
+  attachment: f({
+    image: { maxFileSize: MAX_IMAGE_ATTACHMENT_FILE_SIZE, maxFileCount: MAX_NUM_FILES_PER_UPLOAD },
+    video: { maxFileSize: MAX_VIDEO_ATTACHMENT_FILE_SIZE, maxFileCount: MAX_NUM_FILES_PER_UPLOAD },
+  })
+    .middleware(async () => {
+      const { user } = await validateRequest();
+
+      if (!user) throw new UploadThingError("Unauthorized");
+      return {};
+    })
+    .onUploadComplete(async ({ file }) => {
+      const media = await prisma.media.create({
+        data: {
+          url: file.url.replace("/f/", `/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/`),
+          type: file.type.startsWith("image") ? "IMAGE" : "VIDEO",
+        },
+      });
+
+      return { mediaId: media.id };
     }),
 } satisfies FileRouter;
 
