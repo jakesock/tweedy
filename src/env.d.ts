@@ -11,6 +11,7 @@ declare global {
       POSTGRES_DATABASE: string;
       UPLOADTHING_SECRET: string;
       NEXT_PUBLIC_UPLOADTHING_APP_ID: string;
+      CRON_SECRET: string;
     }
   }
 }
