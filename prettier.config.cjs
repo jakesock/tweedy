@@ -9,10 +9,6 @@ const prettierConfig = {
   useTabs: false,
   overrides: [
     {
-      files: ".editorconfig",
-      options: { parser: "yaml" },
-    },
-    {
       files: "LICENSE",
       options: { parser: "markdown" },
     },

@@ -31,7 +31,7 @@ export default function Post({ post }: PostProps) {
                 href={`/users/${post.user.username}`}
                 className="block font-medium hover:underline"
               >
-                {post.user.username}
+                {post.user.displayName}
               </Link>
             </UserTooltip>
             <Link
