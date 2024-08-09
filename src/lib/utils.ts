@@ -66,3 +66,16 @@ export function getPostDataInclude(loggedInUserId: string) {
 export function getUserPostsQueryKey(userId: string) {
   return [QueryKeyOption.POST_FEED, QueryKeyOption.USER_POSTS, userId];
 }
+
+export const removeAttrFromObject = <O extends object, A extends keyof O>(
+  object: O,
+  attr: A
+): Omit<O, A> => {
+  const newObject = { ...object };
+
+  if (attr in newObject) {
+    delete newObject[attr];
+  }
+
+  return newObject;
+};
