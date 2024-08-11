@@ -6,5 +6,8 @@
     "source.fixAll.eslint": "always",
     "source.fixAll.format": "always",
     "source.organizeImports": "always"
+  },
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
   }
 }

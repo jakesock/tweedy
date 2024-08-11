@@ -1,6 +1,10 @@
 import type { Prisma } from "@prisma/client";
 import type { getPostDataInclude, getUserDataSelect } from "./utils";
 
+type PowOf2 = 1 | 2 | 4 | 8 | 16 | 32 | 64 | 128 | 256 | 512 | 1024;
+type SizeUnit = "B" | "KB" | "MB" | "GB";
+export type FileSize = `${PowOf2}${SizeUnit}`;
+
 export type PostData = Prisma.PostGetPayload<{
   include: ReturnType<typeof getPostDataInclude>;
 }>;
@@ -28,6 +32,6 @@ export interface Attachment {
   isUploading: boolean;
 }
 
-type PowOf2 = 1 | 2 | 4 | 8 | 16 | 32 | 64 | 128 | 256 | 512 | 1024;
-type SizeUnit = "B" | "KB" | "MB" | "GB";
-export type FileSize = `${PowOf2}${SizeUnit}`;
+export interface BookmarkInfo {
+  isBookmarkedByUser: boolean;
+}

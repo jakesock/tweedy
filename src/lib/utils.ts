@@ -1,5 +1,5 @@
 import type { Prisma } from "@prisma/client";
-import { type ClassValue, clsx } from "clsx";
+import { clsx, type ClassValue } from "clsx";
 import { formatDate, formatDistanceToNowStrict } from "date-fns";
 import { twMerge } from "tailwind-merge";
 import { ONE_DAY_MS, QueryKeyOption } from "./constants";
@@ -61,6 +61,14 @@ export function getPostDataInclude(loggedInUserId: string) {
     },
     attachments: true,
     likes: {
+      where: {
+        userId: loggedInUserId,
+      },
+      select: {
+        userId: true,
+      },
+    },
+    bookmarks: {
       where: {
         userId: loggedInUserId,
       },
