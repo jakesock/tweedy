@@ -1,4 +1,4 @@
-import type { PostData } from "@/lib/types";
+import type { CommentData } from "@/lib/types";
 import { MoreHorizontalIcon, Trash2Icon } from "lucide-react";
 import { useState } from "react";
 import { Button } from "../ui/button";
@@ -8,16 +8,15 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import DeletePostDialog from "./DeletePostDialog";
+import DeleteCommentDialog from "./DeleteCommentDialog";
 
-interface PostMoreButtonProps {
-  post: PostData;
+interface CommentMoreButtonProps {
+  comment: CommentData;
   className?: string;
 }
 
-export default function PostMoreButton({ post, className }: PostMoreButtonProps) {
+export default function CommentMoreButton({ comment, className }: CommentMoreButtonProps) {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
-
   return (
     <>
       <DropdownMenu>
@@ -35,8 +34,8 @@ export default function PostMoreButton({ post, className }: PostMoreButtonProps)
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <DeletePostDialog
-        post={post}
+      <DeleteCommentDialog
+        comment={comment}
         open={showDeleteDialog}
         onClose={() => setShowDeleteDialog(false)}
       />
