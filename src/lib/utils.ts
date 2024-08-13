@@ -109,6 +109,26 @@ export function getCommentDataInclude(loggedInUserId: string) {
   } satisfies Prisma.CommentInclude;
 }
 
+export const notificationsInclude = {
+  issuer: {
+    select: {
+      username: true,
+      displayName: true,
+      avatarUrl: true,
+    },
+  },
+  post: {
+    select: {
+      content: true,
+    },
+  },
+  comment: {
+    select: {
+      content: true,
+    },
+  },
+} satisfies Prisma.NotificationInclude;
+
 export function getUserPostsQueryKey(userId: string): QueryKey {
   return [QueryKeyOption.POST_FEED, QueryKeyOption.USER_POSTS, userId];
 }

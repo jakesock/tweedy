@@ -1,5 +1,10 @@
 import type { Prisma } from "@prisma/client";
-import type { getCommentDataInclude, getPostDataInclude, getUserDataSelect } from "./utils";
+import type {
+  getCommentDataInclude,
+  getPostDataInclude,
+  getUserDataSelect,
+  notificationsInclude,
+} from "./utils";
 
 type PowOf2 = 1 | 2 | 4 | 8 | 16 | 32 | 64 | 128 | 256 | 512 | 1024;
 type SizeUnit = "B" | "KB" | "MB" | "GB";
@@ -14,6 +19,9 @@ export type PostData = Prisma.PostGetPayload<{
 export type CommentData = Prisma.CommentGetPayload<{
   include: ReturnType<typeof getCommentDataInclude>;
 }>;
+export type NotificationData = Prisma.NotificationGetPayload<{
+  include: typeof notificationsInclude;
+}>;
 
 export interface PostsPage {
   posts: PostData[];
@@ -22,6 +30,10 @@ export interface PostsPage {
 export interface CommentsPage {
   comments: CommentData[];
   previousCursor: string | null;
+}
+export interface NotificationsPage {
+  notifications: NotificationData[];
+  nextCursor: string | null;
 }
 
 export interface FollowerInfo {
@@ -34,6 +46,9 @@ export interface LikeInfo {
 }
 export interface BookmarkInfo {
   isBookmarkedByUser: boolean;
+}
+export interface NotificationCountInfo {
+  unreadCount: number;
 }
 
 export interface Attachment {
