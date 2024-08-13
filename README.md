@@ -6,7 +6,7 @@
 - [x] COMMENTS
 - [x] FIX LIKE BUG
 - [x] NOTIFICATIONS
-- [ ] OAuth2 (Google sign in, etc.)
+- [x] OAuth2 (Google sign in, etc.)
 - [ ] SEARCH + HASHTAG PAGES
 - [ ] COMMENT REWORK
   - [ ] COMMENT LIKES
@@ -14,9 +14,10 @@
   - [ ] ON SUCCESSFUL COMMENT, SCROLL TO YOUR COMMENT
   - [ ] WHEN COLLAPSING ALL COMMENTS, RESET COMMENTS TO ONLY DISPLAY FIRST PAGE
 - [ ] MOVIE STUFF
-- [ ] EMAILS (confirm email, reset password, etc.)
 - [ ] LIVE NOTIFICATION SYSTEM
 - [ ] IMPLEMENT OWN DIRECT MESSAGING FEATURE
+- [ ] EMAILS (confirm email, reset password, etc.)
+- [ ] ADD ABILITY FOR USER TO CHANGE USERNAME
 - [ ] COME UP WITH NEW APP NAME
 - [ ] DESIGN LOGO
 - [ ] CREATE FAVICON

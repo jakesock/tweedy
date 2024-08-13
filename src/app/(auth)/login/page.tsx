@@ -2,6 +2,7 @@ import loginImage from "@/assets/login-image.jpg";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import GoogleSignInButton from "./google/GoogleSignInButton";
 import LoginForm from "./LoginForm";
 
 export const metadata: Metadata = {
@@ -16,6 +17,12 @@ export default function Page() {
           <h1 className="text-center text-3xl font-bold">Login to tweedy</h1>
           <div className="space-y-5">
             <LoginForm />
+            <div className="flex items-center gap-3">
+              <div className="h-px flex-1 bg-muted" />
+              <span>or</span>
+              <div className="h-px flex-1 bg-muted" />
+            </div>
+            <GoogleSignInButton />
             <Link href="/signup" className="block text-center hover:underline">
               Don&apos;t have an account? Sign Up
             </Link>

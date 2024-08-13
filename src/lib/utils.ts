@@ -44,6 +44,13 @@ export const removeAttrFromObject = <O extends object, A extends keyof O>(
   return newObject;
 };
 
+export function slugify(input: string): string {
+  return input
+    .toLowerCase()
+    .replace(/ /g, "-")
+    .replace(/[^a-z0-9-]/g, "");
+}
+
 //* API utilities
 export function getUserDataSelect(loggedInUserId: string) {
   return {

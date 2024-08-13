@@ -9,11 +9,14 @@ declare global {
       POSTGRES_HOST: string;
       POSTGRES_PASSWORD: string;
       POSTGRES_DATABASE: string;
+      GOOGLE_CLIENT_ID: string;
+      GOOGLE_CLIENT_SECRET: string;
       UPLOADTHING_SECRET: string;
       NEXT_PUBLIC_UPLOADTHING_APP_ID: string;
       CRON_SECRET: string;
+      NEXT_PUBLIC_BASE_URL: string;
     }
   }
 }
 
-export {};
+export {}
