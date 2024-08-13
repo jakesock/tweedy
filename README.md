@@ -4,7 +4,7 @@
 
 - [x] BOOKMARKS
 - [x] COMMENTS
-- [ ] FIX LIKE BUG
+- [x] FIX LIKE BUG
 - [ ] NOTIFICATIONS
 - [ ] DIRECT MESSAGES
 - [ ] OAuth2 (Google sign in, etc.)

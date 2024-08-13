@@ -33,7 +33,7 @@ export default function LikeButton({ postId, initialState }: LikeButtonProps) {
       const prevState = queryClient.getQueryData<LikeInfo>(queryKey);
 
       queryClient.setQueryData<LikeInfo>(queryKey, () => ({
-        likes: (prevState?.likes || 0) + (prevState?.likes ? -1 : 1),
+        likes: (prevState?.likes || 0) + (prevState?.isLikedByUser ? -1 : 1),
         isLikedByUser: !prevState?.isLikedByUser,
       }));
 
