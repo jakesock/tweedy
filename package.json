@@ -16,6 +16,7 @@
     "prisma:format": "npx prisma format",
     "prisma:push": "npx prisma db push",
     "prisma:push:dev": "npx prisma db dev push",
+    "postinstall": "prisma generate",
     "gen-env": "gen-env-types .env -o src/env.d.ts -e ."
   },
   "dependencies": {

@@ -32,6 +32,7 @@ export enum QueryKeyOption {
   COMMENTS = "comments",
   NOTIFICATIONS = "notifications",
   UNREAD_NOTIFICATION_COUNT = "unread-notification-count",
+  SEARCH = "search",
 }
 
 export const FOR_YOU_QUERY_KEY: QueryKey = [QueryKeyOption.POST_FEED, QueryKeyOption.FOR_YOU];

@@ -142,3 +142,6 @@ export function getUserPostsQueryKey(userId: string): QueryKey {
 export function getCommentsQueryKey(postId: string): QueryKey {
   return [QueryKeyOption.COMMENTS, postId];
 }
+export function getSearchResultsQueryKey(searchQuery: string): QueryKey {
+  return [QueryKeyOption.POST_FEED, QueryKeyOption.SEARCH, searchQuery];
+}
